@@ -4,7 +4,7 @@ import getCats from './utils/getCats.js';
 import logger from './utils/logger.js';
 import './db/mongoose.js';
 
-getCats();
+getCats({ month: 12, year: 2020 });
 
 // scheduleJob(process.env.CRON, () => getCats());
 

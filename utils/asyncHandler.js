@@ -1,4 +1,4 @@
 import logger from './logger.js';
 
-const asyncHandler = fn => () => Promise.resolve(fn()).catch(err => logger.error(err));
+const asyncHandler = fn => params => Promise.resolve(fn(params)).catch(err => logger.error(err));
 export default asyncHandler;
