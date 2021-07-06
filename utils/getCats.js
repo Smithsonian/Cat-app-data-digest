@@ -1,6 +1,7 @@
 import axios from 'axios';
 import logger from './logger.js';
 import asyncHandler from './asyncHandler.js';
+import Observation from '../models/Observation.js';
 
 const getCats = asyncHandler(async () => {
   logger.info('Starting to fetch data from API');
@@ -18,7 +19,8 @@ const getCats = asyncHandler(async () => {
   let imagesByObservation = [];
   for (let sequence in groupedBySeqId) {
     const { sequence_id, latitude, longitude, date_time_original } = groupedBySeqId[sequence][0];
-    observations.push({ sequence_id, latitude, longitude, date_time_original });
+    const newObservation = await Observation.create({ sequence_id, latitude, longitude, date_time_original });
+    observations.push(newObservation);
     const test = groupedBySeqId[sequence].map(({ image_id }) => ({ sequence_id, image_id }));
     imagesByObservation = [...imagesByObservation, ...test];
   }
