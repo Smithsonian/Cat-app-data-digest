@@ -11,7 +11,8 @@ const observationSchema = new Schema({
     },
     coordinates: {
       type: [Number],
-      required: true
+      required: true,
+      index: '2d'
     }
   },
   date_time_original: { type: String, required: true },
