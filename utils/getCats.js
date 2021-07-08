@@ -5,7 +5,9 @@ import Observation from '../models/Observation.js';
 
 const getFromAPI = asyncHandler(async ({ month, year }) => {
   logger.info('Starting to fetch data from API');
-  const { data: imagesFromAPI } = await axios.get(`${process.env.CAT_API}?month=${month}&year=${year}`);
+  const { data: imagesFromAPI } = await axios.get(
+    `${process.env.CAT_API}?month=${month}&year=${year}`
+  );
   logger.info(`Retrieved ${imagesFromAPI.length} images from the API`);
   return imagesFromAPI;
 });
@@ -29,8 +31,7 @@ const saveObservations = asyncHandler(async sequences => {
     const images = sequences[sequence].map(({ image_id }) => ({ image_id }));
     const newObservation = {
       sequence_id,
-      latitude,
-      longitude,
+      location: { coordinates: [parseFloat(latitude), parseFloat(longitude)] },
       date_time_original,
       images
     };
