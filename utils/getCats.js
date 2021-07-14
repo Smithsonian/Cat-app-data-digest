@@ -29,7 +29,7 @@ const saveObservations = asyncHandler(async sequences => {
   for (let sequence in sequences) {
     const {
       sub_project_id: project_id,
-      depolyment_id,
+      deployment_id,
       sequence_id,
       latitude,
       longitude,
@@ -38,7 +38,7 @@ const saveObservations = asyncHandler(async sequences => {
     const images = sequences[sequence].map(({ image_id }) => ({ image_id }));
     const newObservation = {
       project_id,
-      depolyment_id,
+      deployment_id,
       sequence_id,
       location: { coordinates: [parseFloat(longitude), parseFloat(latitude)] },
       date_time_original: Date.parse(date_time_original),

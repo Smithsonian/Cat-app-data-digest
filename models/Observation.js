@@ -3,7 +3,7 @@ const { Schema, model } = mongoose;
 
 const observationSchema = new Schema({
   project_id: { type: String, required: true },
-  depolyment_id: { type: String, required: true },
+  deployment_id: { type: String, required: true },
   sequence_id: { type: String, required: true },
   location: {
     type: {
