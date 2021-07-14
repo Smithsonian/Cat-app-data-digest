@@ -27,12 +27,21 @@ const groupImagesBySequence = asyncHandler(async images => {
 const saveObservations = asyncHandler(async sequences => {
   const observations = [];
   for (let sequence in sequences) {
-    const { sequence_id, latitude, longitude, date_time_original } = sequences[sequence][0];
+    const {
+      sub_project_id: project_id,
+      depolyment_id,
+      sequence_id,
+      latitude,
+      longitude,
+      date_time_original
+    } = sequences[sequence][0];
     const images = sequences[sequence].map(({ image_id }) => ({ image_id }));
     const newObservation = {
+      project_id,
+      depolyment_id,
       sequence_id,
       location: { coordinates: [parseFloat(longitude), parseFloat(latitude)] },
-      date_time_original,
+      date_time_original: Date.parse(date_time_original),
       images
     };
     observations.push(newObservation);
