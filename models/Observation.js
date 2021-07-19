@@ -1,5 +1,9 @@
 import mongoose from 'mongoose';
-const { Schema, model } = mongoose;
+const {
+  Schema,
+  model,
+  Types: { ObjectId }
+} = mongoose;
 
 const observationSchema = new Schema({
   project_id: { type: String, required: true },
@@ -19,6 +23,7 @@ const observationSchema = new Schema({
   },
   date_time_original: { type: Date, required: true },
   forReview: { type: Boolean, default: false },
+  specimen: { type: ObjectId, ref: 'Specimen' },
   status: {
     type: String,
     enum: [
@@ -57,6 +62,15 @@ const observationSchema = new Schema({
     type: String,
     enum: ['Unknown', 'Black', 'Brown', 'Buff/Tan', 'Gray', 'Orange', 'White'],
     default: 'Unknown'
+  },
+  captureSide: {
+    type: [
+      {
+        type: String,
+        enum: ['Left', 'Right', 'Bottom', 'Top', 'Front', 'Rear']
+      }
+    ],
+    default: []
   },
   images: { type: [{ image_id: { type: String, required: true } }], required: true }
 });
