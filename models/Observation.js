@@ -53,7 +53,7 @@ const observationSchema = new Schema({
   },
   sex: {
     type: String,
-    enum: ['Male', 'Female', 'Unknown'],
+    enum: ['Male', 'Female/Neutered', 'Unknown'],
     default: 'Unknown'
   },
   notched: {
