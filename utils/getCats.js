@@ -50,8 +50,10 @@ const saveObservations = asyncHandler(async sequences => {
   logger.info(`Saved ${observations.length} new observations to the database`);
 });
 
-const getCats = asyncHandler(async ({ month, year }) => {
-  const images = await getFromAPI({ month, year });
+const getCats = asyncHandler(async () => {
+  const date = new Date();
+  const range = { month: date.getMonth(), year: date.getFullYear() };
+  const images = await getFromAPI(range);
   const sequences = await groupImagesBySequence(images);
   await saveObservations(sequences);
 });

@@ -10,9 +10,7 @@ import logger from './utils/logger.js';
 import './db/mongoose.js';
 import { getReport, uploadCSV } from './controllers/observations.js';
 
-// getCats({ month: 12, year: 2020 });
-
-// scheduleJob(process.env.CRON, () => getCats());
+process.env.CRON && scheduleJob(process.env.CRON, () => getCats());
 
 const app = express();
 const port = process.env.PORT || 8000;
